@@ -1,8 +1,6 @@
-# Health CauseNet
+# Mining Health-related Cause-Effect Statements with High Precision at Large Scale
 
-This repository is used to evaluate several termhood scores for extracting health-related statements from web data. Python requirements are contained in the `requirements.txt` file.
-
-Samples of the resources extracted from the CauseNet can be found in `data/` directory.
+This repository contains code to train several termhood scores for the efficient and effective extraction of health-related phrases from large scale corpora. For more information, see our paper [Mining Health-related Cause-Effect Statements with High Precision at Large Scale](https://webis.de/publications.html?q=schlatt#schlatt_2022) (COLING'22). A large scale resource of health-related cause--effect statements and sentences can be found at [TODO](url).
 
 ## Corpora
 
