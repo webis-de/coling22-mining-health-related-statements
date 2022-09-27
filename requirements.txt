@@ -77,7 +77,7 @@ langcodes==3.3.0
 leveldb==0.201
 libarchive-c
 lxml==4.8.0
-Mako==1.2.0
+Mako==1.2.2
 Markdown==3.3.6
 MarkupSafe
 matplotlib==3.5.1
