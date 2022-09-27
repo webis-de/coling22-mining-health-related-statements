@@ -97,7 +97,7 @@ nltk==3.7
 nmslib==2.1.1
 notebook==6.4.11
 numpy
-oauthlib==3.2.0
+oauthlib==3.2.1
 optuna==2.10.0
 packaging==21.3
 pandas==1.4.2
