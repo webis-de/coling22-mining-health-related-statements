@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  metamap:
+    image: metamap:latest
+    build: .
+    volumes:
+      - ./output:/root/output
+      - ./input:/root/input
+      - ./metamap.sh:/root/metamap.sh

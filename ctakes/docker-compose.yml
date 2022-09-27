@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  ctakes:
+    image: ctakes:latest
+    build: .
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - ./input-dir:/root/ctakes/input
+      - ./output-dir:/root/ctakes/output
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $XAUTHORITY:/root/.Xauthority:rw
+      - ./UMLS:/root/UMLS
