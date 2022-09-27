@@ -116,7 +116,7 @@ preshed==3.0.6
 prettytable==3.2.0
 prometheus-client==0.14.1
 prompt-toolkit
-protobuf==3.20.1
+protobuf==3.20.2
 psutil
 ptyprocess
 pyarrow==7.0.0
