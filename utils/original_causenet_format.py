@@ -87,18 +87,5 @@ def main(args=None):
 
 
 if __name__ == "__main__":
-    main(
-        [
-            "--causenet_jsonl_file",
-            "/mnt/ceph/storage/data-in-progress/data-research/web-search/"
-            "health-question-answering/causenet-data/causality-graphs/integration/"
-            "causenet-full.jsonl.bz2",
-            "--health_causenet_tsv_file",
-            "/mnt/ceph/storage/data-in-progress/data-research/web-search/"
-            "health-question-answering/causenet/health-causenet.tsv",
-            "--health_causenet_out_dir",
-            "/mnt/ceph/storage/data-in-progress/data-research/web-search/"
-            "health-question-answering/health-causenet/",
-        ]
-    )
+    main()
 
