@@ -351,7 +351,7 @@ def load_cf(
 def _contrastive_score(
     causenet: pd.DataFrame,
     medical_termhood: pd.Series,
-    p: float,
+    r: float,
     n_gram_size: Tuple[int, int],
     verbose: bool = True,
 ) -> pd.DataFrame:
@@ -361,24 +361,24 @@ def _contrastive_score(
         pd.unique(causenet.loc[:, ["cause", "effect"]].values.ravel())
     )
 
-    def p_mean(array, p) -> float:
+    def generalized_mean(array, r) -> float:
         array = array[~np.isnan(array) & ~np.isinf(array)]
         if array.shape[0] == 0:
             return 0
-        if p == float("inf"):
+        if r == float("inf"):
             return array.max()
-        if p == -float("inf"):
+        if r == -float("inf"):
             return array.min()
-        if p == 0:
+        if r == 0:
             array = array[array != 0]
             if array.shape[0] == 0:
                 return 0
             return np.exp(np.log(array).sum() / array.shape[0])
-        if p < 0:
+        if r < 0:
             array = array[array != 0]
         if array.shape[0] == 0:
             return 0
-        out = ((array ** p).sum() / array.shape[0]) ** (1 / p)
+        out = ((array ** r).sum() / array.shape[0]) ** (1 / r)
         return out
 
     if verbose:
@@ -396,7 +396,7 @@ def _contrastive_score(
     # rolling to create ngrams
     medical_contrastive_score = (
         func(
-            lambda x: p_mean(
+            lambda x: generalized_mean(
                 np.array(
                     [
                         medical_termhood.get("|".join(terms.values), np.nan)
@@ -405,7 +405,7 @@ def _contrastive_score(
                         if terms.values.shape[0] == n_gram
                     ]
                 ),
-                p,
+                r,
             )
         )
         .rename("medical_score")
@@ -442,7 +442,7 @@ def _term_domain_specificity(
     causenet: pd.DataFrame,
     cf: pd.DataFrame,
     log: float = np.e,
-    p: float = 1,
+    r: float = 1,
     n_gram_size: Tuple[int, int] = (1, 1),
     verbose: bool = True,
 ) -> pd.DataFrame:
@@ -450,7 +450,7 @@ def _term_domain_specificity(
     medical_termhood = term_domain_specificity(cf, log)
 
     medical_score = _contrastive_score(
-        causenet, medical_termhood, p, n_gram_size, verbose
+        causenet, medical_termhood, r, n_gram_size, verbose
     )
 
     return medical_score
@@ -475,7 +475,7 @@ def _contrastive_weight(
     cf: pd.DataFrame,
     log: float = np.e,
     add: float = 1,
-    p: float = 1,
+    r: float = 1,
     n_gram_size: Tuple[int, int] = (1, 1),
     verbose: bool = True,
 ) -> pd.DataFrame:
@@ -483,7 +483,7 @@ def _contrastive_weight(
     medical_termhood = contrastive_weight(cf, log, add)
 
     medical_score = _contrastive_score(
-        causenet, medical_termhood, p, n_gram_size, verbose
+        causenet, medical_termhood, r, n_gram_size, verbose
     )
 
     return medical_score
@@ -502,7 +502,7 @@ def _discriminative_weight(
     cf: pd.DataFrame,
     contrastive_log: float = np.e,
     specificity_log: float = np.e,
-    p: float = 1,
+    r: float = 1,
     n_gram_size: Tuple[int, int] = (1, 1),
     verbose: bool = True,
 ) -> pd.DataFrame:
@@ -510,7 +510,7 @@ def _discriminative_weight(
     medical_termhood = discriminative_weight(cf, contrastive_log, specificity_log)
 
     medical_score = _contrastive_score(
-        causenet, medical_termhood, p, n_gram_size, verbose
+        causenet, medical_termhood, r, n_gram_size, verbose
     )
 
     return medical_score
