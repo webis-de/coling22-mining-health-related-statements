@@ -128,16 +128,16 @@ def main(args=None):
         kwargs["cf"] = cf
         kwargs["p"] = float(args.p)
         kwargs["n_gram_size"] = args.n_gram_size
-        func_name = (
-            f"{args.func}-"
-            f"{'_'.join(args.corpora)}-"
-            f"{args.p}-"
-            f"({'_'.join(str(n_gram_size) for n_gram_size in args.n_gram_size)})"
+        func_name = "-".join(
+            [
+                args.func,
+                "_".join(args.corpora),
+                f"({args.n_gram_size[0]}_{args.n_gram_size[1]})",
+                str(args.p),
+            ]
         )
 
-    pg = tqdm.tqdm(causenet_paths)
-    for causenet_path in pg:
-        pg.set_description(str(causenet_path))
+    for causenet_path in causenet_paths:
         if (
             causenet_path.with_name(
                 causenet_path.name.replace("causenet", func_name)
