@@ -1,6 +1,6 @@
 BASE_PATH = (
     "/mnt/ceph/storage/data-in-progress/data-research/"
-    "web-search/health-question-answering/"
+    "web-search/COLING-22/coling22-health-causenet/"
 )
 CORPORA_PATH = "/mnt/ceph/storage/corpora/corpora-thirdparty/"
 PUBMED_CORPUS_PATH = CORPORA_PATH + "corpus-pubmed/"
@@ -20,10 +20,6 @@ SCISPACY_RX_SNO_PATH = BASE_PATH + "scispacy/rx_sno"
 PUBMED_ABSTRACT_XML_DIR = PUBMED_CORPUS_PATH + "xml/"
 PUBMED_ABSTRACT_PARQUET_DIR = PUBMED_CORPUS_PATH + "parquet/"
 PUBMED_ABSTRACT_JSONL_DIR = PUBMED_CORPUS_PATH + "jsonl/"
-ABSTRACT_CUI_DIR = (
-    "/mnt/ceph/storage/data-in-progress/data-research/web-search/"
-    "health-question-answering/scispacy_abstract_cui_extraction/"
-)
 WIKIPEDIA_DUMP_PATH = (
     WIKIPEDIA_CORPUS_PATH
     + "wikimedia-snapshots/enwiki-20210601/enwiki-20210601-pages-articles.xml.bz2"
